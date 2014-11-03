@@ -30,23 +30,45 @@
         ];
     })
     
-    .controller('aboutController', function ($scope, $route, $routeParams, $location) {
-        $scope.$routeParams = $routeParams;
-        $scope.$route = $route;
-        $scope.$location = $location;
+    .controller('staticController', function ($scope) {
+        
+    })
+    
+    .controller('projectController', function ($scope, projectsFactory) {
+        $scope.projects = projectsFactory.getProjects();
     })
     
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
-                controller: 'aboutController',
+                controller: 'staticController',
                 templateUrl: 'views/home.html'
             })
             .when('/about', {
-                controller: 'aboutController',
+                controller: 'staticController',
                 templateUrl: 'views/about.html'
             })
+            .when('/projects', {
+                controller: 'projectController',
+                templateUrl: 'views/projects.html'
+            })
             .otherwise({ redirectTo: '/' });
+    })
+    
+    .factory('projectsFactory', function () {
+        var projects = [
+            { title: 'Project 1', desc: 'Just a non-existing, space-filling project.' },
+            { title: 'Anguport', desc: '\'Angular Portfolio\' is a simple application I wrote to learn angularjs.' }
+        ];
+        
+        var factory = {};
+        factory.getProjects = function() {
+            return projects;
+        };
+        factory.addProject = function(project) {
+            // lol
+        };
+        return factory;
     });
 
     
