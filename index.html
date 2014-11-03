@@ -2,27 +2,55 @@
 <html>
 
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.js"></script>
 </head>
 
-<body>
+<body ng-app="anguport">
 
-<div ng-app="" ng-controller="menuController">
-    <ul>
-        <li ng-repeat="item in menuitems"><a href="{{ item.l }}">{{ item.t }}</a></li>
-    </ul>
-</div>
+    <div ng-controller="menuController">
+        <ul>
+            <li ng-repeat="item in menuitems"><a href="#{{ item.l }}">{{ item.t }}</a></li>
+        </ul>
+    </div>
+    
+    <div ng-view=""></div>
+
 
 <script>
-function menuController($scope) {
-    $scope.menuitems = [
-        {l: '/home', t: 'Home'},
-        {l: '/about', t: 'About'},
-        {l: '/projects', t: 'Projects'},
-        {l: '/contact', t: 'Contact'}
-    ];
-}
+    
+    angular.module('anguport', ['ngRoute'])
+    
+    .controller('menuController', function ($scope) {
+        $scope.menuitems = [
+            {l: '/home', t: 'Home'},
+            {l: '/about', t: 'About'},
+            {l: '/projects', t: 'Projects'},
+            {l: '/contact', t: 'Contact'}
+        ];
+    })
+    
+    .controller('aboutController', function ($scope, $route, $routeParams, $location) {
+        $scope.$routeParams = $routeParams;
+        $scope.$route = $route;
+        $scope.$location = $location;
+    })
+    
+    .config(function ($routeProvider) {
+        $routeProvider
+            .when('/', {
+                controller: 'aboutController',
+                templateUrl: 'views/home.html'
+            })
+            .when('/about', {
+                controller: 'aboutController',
+                templateUrl: 'views/about.html'
+            })
+            .otherwise({ redirectTo: '/' });
+    });
+
+    
 </script>
 
 </body>
-</html>1
+</html>
