@@ -1,0 +1,12 @@
+[
+    {
+        "id": 0,
+        "title": "Project 1",
+        "desc": "Just a non-existing, space-filling project."
+    },
+    { 
+        "id": 1,
+        "title": "Anguport",
+        "desc": "'Angular Portfolio' is a simple application I wrote to learn angularjs." 
+    }
+]

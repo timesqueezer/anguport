@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en" ng-app="anguport">
 <head>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.js"></script>
+    <meta charset="utf-8">
+    <title>Angularjs Portfolio Application</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controllers.js"></script>
+    <script src="app/services.js"></script>
 </head>
 
-<body ng-app="anguport">
+<body>
 
     <div ng-controller="menuController">
         <ul>
@@ -14,62 +23,12 @@
         </ul>
     </div>
     
-    <div ng-view=""></div>
+    <div ng-view></div>
 
 
 <script>
     
-    angular.module('anguport', ['ngRoute'])
     
-    .controller('menuController', function ($scope) {
-        $scope.menuitems = [
-            {l: '/home', t: 'Home'},
-            {l: '/about', t: 'About'},
-            {l: '/projects', t: 'Projects'},
-            {l: '/contact', t: 'Contact'}
-        ];
-    })
-    
-    .controller('staticController', function ($scope) {
-        
-    })
-    
-    .controller('projectController', function ($scope, projectsFactory) {
-        $scope.projects = projectsFactory.getProjects();
-    })
-    
-    .config(function ($routeProvider) {
-        $routeProvider
-            .when('/', {
-                controller: 'staticController',
-                templateUrl: 'views/home.html'
-            })
-            .when('/about', {
-                controller: 'staticController',
-                templateUrl: 'views/about.html'
-            })
-            .when('/projects', {
-                controller: 'projectController',
-                templateUrl: 'views/projects.html'
-            })
-            .otherwise({ redirectTo: '/' });
-    })
-    
-    .factory('projectsFactory', function () {
-        var projects = [
-            { title: 'Project 1', desc: 'Just a non-existing, space-filling project.' },
-            { title: 'Anguport', desc: '\'Angular Portfolio\' is a simple application I wrote to learn angularjs.' }
-        ];
-        
-        var factory = {};
-        factory.getProjects = function() {
-            return projects;
-        };
-        factory.addProject = function(project) {
-            // lol
-        };
-        return factory;
-    });
 
     
 </script>
