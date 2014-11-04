@@ -1,2 +1,3 @@
-bower_components*
-backend/env*
+static/bower_components*
+env*
+*.pyc

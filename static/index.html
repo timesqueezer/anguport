@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="anguport">
+<head>
+    <meta charset="utf-8">
+    <title>Angularjs Portfolio Application</title>
+    <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap.css">
+    
+    <script src="static/bower_components/angular/angular.js"></script>
+    <script src="static/bower_components/angular-route/angular-route.js"></script>
+    <script src="static/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="static/bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="static/bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="static/app/app.js"></script>
+    <script src="static/app/controllers.js"></script>
+    <script src="static/app/services.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <nav ng-controller="menuController" class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li ng-repeat="item in menuitems"><a href="#{{ item.l }}">{{ item.t }}</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div ng-view></div>
+
+    </div>
+</body>
+</html>

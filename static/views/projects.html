@@ -1,0 +1,27 @@
+<h1>Projects</h1>
+
+<div ng-repeat="project in projects">
+    <div class="row">
+        <div class="col-md-8"><h2>{{ project.title }}</h2></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6"><p>{{ project.desc }}</p></div>
+        <div class="col-md-2">
+            <button class="btn btn-danger" ng-click="delProject(project.id)">Delete</button>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row col-md-8">
+        <label>Project title:</label>
+        <input class="form-control" ng-model="newProject.title" type="text" placeholder="Enter your title here..">
+    </div>
+    <div class="row col-md-8">
+        <label>Project description:</label>
+        <textarea class="form-control" rows="5" ng-model="newProject.desc" placeholder="Enter your description here.."></textarea>
+    </div>
+    <div class="row col-md-6">
+        <button class="btn btn-primary" type="button" ng-disabled="!newProject.title || !newProject.desc" ng-click="addProject()">Add Project</button>
+    </div>
+</div>
