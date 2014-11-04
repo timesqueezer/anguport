@@ -19,6 +19,17 @@ angular.module('anguportControllers', [])
 
 .controller('projectListController', ['$scope', 'projectsFactory', function ($scope, projectsFactory) {
     $scope.projects = projectsFactory.query();
+    $scope.addProject = function () {
+        var title = $scope.newProject.title;
+        var desc = $scope.newProject.desc;
+        
+        var new_p = new projectsFactory({'projectId': title, 'title': title, 'desc': desc });
+        new_p.$save({projectId: title});
+    };
+    
+    $scope.delProject = function (id) {
+        projectsFactory.delete({projectId: id});
+    };
     
 }])
 

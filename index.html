@@ -16,22 +16,18 @@
 </head>
 
 <body>
+    <div class="container">
 
-    <div ng-controller="menuController">
-        <ul>
-            <li ng-repeat="item in menuitems"><a href="#{{ item.l }}">{{ item.t }}</a></li>
-        </ul>
+        <nav ng-controller="menuController" class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li ng-repeat="item in menuitems"><a href="#{{ item.l }}">{{ item.t }}</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div ng-view></div>
+
     </div>
-    
-    <div ng-view></div>
-
-
-<script>
-    
-    
-
-    
-</script>
-
 </body>
 </html>
