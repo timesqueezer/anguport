@@ -1,19 +1,12 @@
-from flask import Flask
+from flask import jsonify
 from flask.ext import restful
 from flask.ext.restful import reqparse
 
-from crossdomainhelper import *
-
-app = Flask(__name__)
-api = restful.Api(app)
-
-projects = {
-    'test1': {'id': 'test1', 'title': 'Test1 Project', 'desc': 'Description of the first test project. This is only here to let me see if my script works.'},
-    'test2': {'id': 'test2', 'title': 'Second Test Project', 'desc': 'Second description. Nothing really here, it\'s just a little lorem ipsum'},
-}
+from ngptf import app, api_rest
+from ngptf.models import Project
 
 def abort_if_not_project(project_id):
-    if project_id not in projects:
+    if Project.query.filter_by(id = project_id) == None:
         restful.abort(404, message="Project {} doesn't exist").format(project_id)
 
 parser = reqparse.RequestParser()
@@ -22,7 +15,7 @@ parser.add_argument('desc', type=str)
 
 class ProjectList(restful.Resource):
     def get(self):
-        return projects
+        return jsonify(Project.query.all())
     def post(self):
         args = parser.parse_args()
         project_id = 'test%d' % (len(projects) + 1)
@@ -43,8 +36,8 @@ class Projects(restful.Resource):
         projects[project_id] = project
         return project, 201
 
-api.add_resource(Projects, '/api/<string:project_id>')
-api.add_resource(ProjectList, '/api')
+api_rest.add_resource(Projects, '/api/<string:project_id>')
+api_rest.add_resource(ProjectList, '/api')
 
 @app.route('/')
 def main():
