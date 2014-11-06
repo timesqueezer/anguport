@@ -1,3 +1,5 @@
+from marshmallow import Schema, fields
+
 from ngptf import db
 
 class Project(db.Model):
@@ -11,3 +13,8 @@ class Project(db.Model):
     
     def __repr__(self):
         return '<Project %r>' % self.title
+
+class ProjectSchema(Schema):
+    id = fields.Integer()
+    title = fields.String()
+    desc = fields.String()
