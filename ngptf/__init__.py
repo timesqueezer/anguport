@@ -12,4 +12,4 @@ import ngptf.api
 
 @app.route('/')
 def main():
-    return app.send_static_file('index.html')
+    return app.send_static_file('build/index.html')
